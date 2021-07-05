@@ -1,0 +1,15 @@
+<div class="autorization">
+    <form class="form-logIn" [formGroup]="form">
+        <h3 class="form-title">Log In</h3>
+        <div class="form__input-group">
+            <input formControlName="name" class="form-input" placeholder="Enter your Name" name="name" required>
+            <input formControlName="password" class="form-input" placeholder="Enter your Password" name="password" required>
+        </div>
+        <button (click)="submit()" class="form-btn" type="submit">Log in</button>
+
+        <div class="registration">
+            <span class="registration__title">Don’t have an account?</span>
+            <button class="registration__btn"><a routerLink="/formRegistration" >Sign up now</a></button>
+        </div>
+    </form>
+</div>

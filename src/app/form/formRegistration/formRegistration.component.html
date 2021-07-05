@@ -1,0 +1,14 @@
+<div class="autorization">
+    <form class="form-registration" [formGroup]="form">
+        <h3 class="form-title">Registration</h3>
+        <div class="form__input-group">
+            <input formControlName="name" class="form-input" placeholder="Enter your Name" name="name" required>
+            <input formControlName="password" class="form-input" placeholder="Enter your Password" name="password" required>
+        </div>
+        <button (click)="submit()" class="form-btn" type="submit">Registration</button>
+
+        <div class="logIn">
+            <button class="logIn__btn"><a routerLink="/formLogIn">Log in</a></button>
+        </div>
+    </form>
+</div>

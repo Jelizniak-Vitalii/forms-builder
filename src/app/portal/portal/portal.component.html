@@ -1,0 +1,50 @@
+
+
+
+<div class="form-builder">
+  <div class="example-container">
+  
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="todo"
+      [cdkDropListConnectedTo]="[doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div  class="example-box " *ngFor="let item of todo" cdkDrag [innerHTML]="item.value_before | noSanitize"></div>
+    </div>
+</div>
+  
+  <div class="example-container">
+  
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="done"
+      [cdkDropListConnectedTo]="[todoList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div (click)="select($event)" class="example-box" *ngFor="let item of done" cdkDrag [innerHTML]="item.value_before | noSanitize"></div>
+    </div>
+  </div>
+
+  <div class="example-container">
+     <app-portalmenu
+     (inputWidth)="inputWid($event)"
+     (inputHeight)="inputHeight($event)"
+     (inputBorderWidth)="inputBorderWidth($event)"
+     (inputBorderStyle)="inputBorderStyle($event)"
+     (inputFontSize)="inputFontSize($event)"
+     (inputColor)="inputColor($event)"
+     (inputFontWeight)="inputFontWeight($event)"
+     
+     
+     ></app-portalmenu>
+  </div>
+</div>
+
+
+ 
+
+
+
