@@ -1,4 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ExampleActions } from '../../store/actions';
+
 
 @Component({
   selector: 'app-portalmenu',
@@ -7,41 +10,35 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class PortalmenuComponent implements OnInit {
 
-  constructor() { }
+  color: string;
+  width: string;
+  height: string;
+  fontSize: string;
 
-  @Output() inputWidth: EventEmitter<any> = new EventEmitter();
-  @Output() inputHeight: EventEmitter<any> = new EventEmitter();
-  @Output() inputBorderWidth: EventEmitter<any> = new EventEmitter();
-  @Output() inputBorderStyle: EventEmitter<any> = new EventEmitter();
-  @Output() inputFontSize: EventEmitter<any> = new EventEmitter();
-  @Output() inputColor: EventEmitter<any> = new EventEmitter();
-  @Output() inputFontWeight: EventEmitter<any> = new EventEmitter();
+  constructor(private store$: Store) { }
+
+  changeColor(event: any): void{
+    this.store$.dispatch(ExampleActions.changeColor({
+      color: event.target.value }))
+  }
+  changeFontSize(event: any): void{
+    this.store$.dispatch(ExampleActions.changeFontSize({
+      fontSize: event.target.value }))
+  }
+  changeWidth(event: any): void{
+    this.store$.dispatch(ExampleActions.changeWidth({
+      width: event.target.value }))
+  }
+  changeHeight(event: any): void{
+    this.store$.dispatch(ExampleActions.changeHeight({
+      height: event.target.value }))
+  }
+  changeBorderStyle(event: any): void{
+    this.store$.dispatch(ExampleActions.changeBorderStyle({
+      borderStyle: event.target.value }))
+  }
 
   ngOnInit(): void {
-
-  
   }
-  changeWidth(event: Event){
-      this.inputWidth.emit(event.target)
-  }
-  changeHeight(event: Event){
-    this.inputHeight.emit(event.target)
-  }
-  changeBorderWidth(event: Event){
-    this.inputBorderWidth.emit(event.target)
-  }
-  changeBorderStyle(event: Event){
-    this.inputBorderStyle.emit(event.target)
-  }
-  changeFontSize(event: Event){
-    this.inputFontSize.emit(event.target)
-  }
-  changeColor(event: Event){
-    this.inputColor.emit(event.target)
-  }
-  changeFontWeight(event: Event){
-    this.inputFontWeight.emit(event.target)
-  }
-
 
 }

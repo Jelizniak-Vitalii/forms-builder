@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormLogInComponent} from '../form/formLogIn/formLogIn.component';
+import { Router } from '@angular/router';
+
+import {  ServiceAuthentication } from '../shared/services/serviceAuthentication'
+
 
 @Component({
   selector: 'app-header',
@@ -7,15 +10,23 @@ import { FormLogInComponent} from '../form/formLogIn/formLogIn.component';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  condition: boolean = true;
+  currentUser: boolean;
 
   constructor(
-    public formLogInComponent: FormLogInComponent
+    private router: Router,
+    private serviceCurrentUser: ServiceAuthentication
   ){}
 
   ngOnInit(): void {
-    this.formLogInComponent.data.subscribe((x) =>{
-    this.condition = x
+    this.serviceCurrentUser.data$.subscribe((x: any) =>{
+      this.currentUser = x
     })
-}
+  }
+  
+  logOut(){
+    localStorage.removeItem('currentUser');
+    this.serviceCurrentUser.emitdata(!this.currentUser)
+ 
+    this.router.navigate(['/'])
+  }
 }

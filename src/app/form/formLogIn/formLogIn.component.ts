@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { Injectable } from '@angular/core';
+import {  ServiceAuthentication } from '../../shared/services/serviceAuthentication'
 
 
 @Component({
@@ -12,20 +11,20 @@ import { Injectable } from '@angular/core';
   styleUrls: ['../form.component.scss']
 })
 
-@Injectable({ providedIn: 'root' })
+
 
 export class FormLogInComponent implements OnInit {
 
   form: any = FormGroup;
-  status: boolean = true;
+  currentUser: boolean = true;
   
-  private dataObsevable = new BehaviorSubject<boolean>(this.status);
-  data = this.dataObsevable.asObservable()
+
 
     constructor(
         private formBuilder: FormBuilder,
         private http: HttpClient,
-        private router: Router
+        private router: Router,
+        private serviceCurrentUser: ServiceAuthentication
         ){}
 
     ngOnInit(): void {
@@ -36,12 +35,9 @@ export class FormLogInComponent implements OnInit {
     }
 
     login(){
-      this.dataObsevable.next(!this.status)
+      this.serviceCurrentUser.emitdata(!this.currentUser)
     }
  
-    logOut(){
-      localStorage.removeItem('currentUser');
-    }
     
 
     submit(): void {

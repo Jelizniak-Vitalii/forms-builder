@@ -1,43 +1,91 @@
-import { Component, ElementRef,  ViewContainerRef, OnInit, ViewChild, TemplateRef, AfterViewInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import {ComponentPortal, DomPortal, Portal, CdkPortal, TemplatePortal} from '@angular/cdk/portal';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { InputComponent } from './../input/input.component'
+import { Component, ViewContainerRef, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
-
+import { select, Store } from '@ngrx/store';
+import { ExampleSelector} from '../../store/selectors'
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-portal',
   templateUrl: './portal.component.html',
-  styleUrls: ['./portal.component.scss']
+  styleUrls: ['./portal.component.scss'],
 })
-export class PortalComponent implements AfterViewInit {
-  constructor() { }
+export class PortalComponent implements OnInit {
+  @ViewChild('buttonTemplate', {static: true}) buttonTemplate: TemplateRef<unknown>;
+  @ViewChild('inputTemplate' ,{static: true}) inputTemplate: TemplateRef<unknown>
+  @ViewChild('textareaTemplate',{static: true}) textareaTemplate: TemplateRef<unknown>
+  @ViewChild('checkboxTemplate',{static: true}) checkboxTemplate: TemplateRef<unknown>
+  @ViewChild('selectTemplate',{static: true}) selectTemplate: TemplateRef<unknown>
 
-  // @Input() inputWid: any;
-  ngAfterViewInit(): void {
+  buttonPortal: TemplatePortal<any>;
+  checkboxPortal: TemplatePortal<any>;
+  selectPortal: TemplatePortal<any>;
+  inputPortal: TemplatePortal<any>
+  textareaPortal: TemplatePortal<any>;
+  templateArr: TemplateRef<unknown>[] = [];
+
+  color$: string;  
+  width$: string
+  height$: string
+  fontSize$: string    
+  borderStyle$: string  
+
+
+  activeElement: any;
+
+  todo: any = [
+
+  ];
+  done = [
+    
+  ];
 
   
-    
+  constructor(
+    private _viewContainerRef: ViewContainerRef,
+    private store$: Store
+    ) { 
+    this.store$.pipe(select(ExampleSelector.color))
+    .subscribe(el => 
+      this.color$ = el);
+  
+    this.store$.pipe(select(ExampleSelector.fontSize))
+    .subscribe((el) => {
+      this.fontSize$ = el});
+
+    this.store$.pipe(select(ExampleSelector.width))
+    .subscribe(el => 
+      this.width$ = el);
+
+    this.store$.pipe(select(ExampleSelector.height))
+    .subscribe(el => 
+      this.height$ = el);
+
+    this.store$.pipe(select(ExampleSelector.borderStyle))
+    .subscribe(el => 
+      this.borderStyle$ = el);
 
   }
-  size: any;
-
-  todo = [
-    
-      {value_before: '<input class="example-box__items" appStyleDirective placeholder="Ведите текст">'},
-      {value_before: '<button class="example-box__items" appStyleDirective>Button</button>'},
-      {value_before: '<textarea class="example-box__items" placeholder="Ведите текст"></textarea>'},
-      {value_before: '<input class="example-box__items" type="checkbox">'},
-      {value_before: '<select class="example-box__items"><option>First</option><option>Second</option></select>'},
-
-
  
-  ];
+  ngOnInit(): void {
+    
+    const templateArr = [
+      { portal: this.buttonPortal, portalElement: this.buttonTemplate  },
+      { portal: this.checkboxPortal, portalElement: this.checkboxTemplate},
+      { portal: this.selectPortal, portalElement: this.selectTemplate},
+      { portal: this.inputPortal, portalElement: this.inputTemplate},
+      { portal: this.textareaPortal, portalElement: this.textareaTemplate}
+    ];
 
-  done = [
-    {value_before: ''},
-  ];
+    templateArr.map((x) =>{
+      const a = x.portal = new TemplatePortal(
+        x.portalElement,
+        this._viewContainerRef
+      )
+      this.todo.push(a)
+    })
+  }
+  
 
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
@@ -50,30 +98,20 @@ export class PortalComponent implements AfterViewInit {
     }
   }
 
-  select(event: Event){
-    this.size =  event.target
+
+  choiceElement(event: any): void {
+    if(this.done.length > 0) {
+      this.activeElement =  event.target
+    }    
   }
 
-  inputWid(event: any){
-    this.size.style.width = event.value
-  }
-  inputHeight(event: any){
-    this.size.style.height = event.value
-  }
-  inputBorderStyle(event: any){
-    this.size.style.borderStyle = event.value
-  }
-  inputBorderWidth(event: any){
-    this.size.style.borderWidth = event.value
-  }
-  inputColor(event: any){
-    this.size.style.color = event.value
-  }
-  inputFontWeight(event: any){
-    this.size.style.fontWeight = event.value
-  }
-  inputFontSize(event: any){
-    this.size.style.fontSize = event.value
+
+  changeStyle(){
+    this.activeElement.style.fontSize = this.fontSize$;
+    this.activeElement.style.color = this.color$;
+    this.activeElement.style.width = this.width$;
+    this.activeElement.style.height = this.height$;
+    this.activeElement.style.borderStyle = this.borderStyle$;
   }
 
 }

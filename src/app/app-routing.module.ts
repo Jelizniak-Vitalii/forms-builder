@@ -4,12 +4,13 @@ import { TitleComponent } from './title/title.component';
 import { FormRegistrationComponent } from './form/formRegistration/formRegistration.component';
 import { FormLogInComponent} from './form/formLogIn/formLogIn.component';
 import { PortalComponent } from './portal/portal/portal.component';
+import { GuardGuard } from './shared/guard.guard';
 
 const routes: Routes = [
-  { path: 'title', component: TitleComponent},
+  { path: '', component: TitleComponent},
   { path: 'formLogIn', component: FormLogInComponent},
   { path: 'formRegistration', component: FormRegistrationComponent},
-  { path: 'portal', component: PortalComponent}
+  { path: 'portal', component: PortalComponent, canActivate: [GuardGuard]}
 ];
 
 @NgModule({

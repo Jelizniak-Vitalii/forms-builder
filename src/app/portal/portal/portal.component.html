@@ -1,9 +1,6 @@
 
-
-
-<div class="form-builder">
+<div class="form-builder ">
   <div class="example-container">
-  
     <div
       cdkDropList
       #todoList="cdkDropList"
@@ -11,7 +8,7 @@
       [cdkDropListConnectedTo]="[doneList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div  class="example-box " *ngFor="let item of todo" cdkDrag [innerHTML]="item.value_before | noSanitize"></div>
+      <div class="example-box" *ngFor="let i of todo" cdkDrag [cdkPortalOutlet]="i">Pull me<ng-template>{{i}}</ng-template></div>
     </div>
 </div>
   
@@ -24,25 +21,38 @@
       [cdkDropListConnectedTo]="[todoList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div (click)="select($event)" class="example-box" *ngFor="let item of done" cdkDrag [innerHTML]="item.value_before | noSanitize"></div>
+      <div class="example-box" *ngFor="let i of done" cdkDrag [cdkPortalOutlet]="i">Pull me<ng-template >{{i}}</ng-template></div>
     </div>
   </div>
 
   <div class="example-container">
-     <app-portalmenu
-     (inputWidth)="inputWid($event)"
-     (inputHeight)="inputHeight($event)"
-     (inputBorderWidth)="inputBorderWidth($event)"
-     (inputBorderStyle)="inputBorderStyle($event)"
-     (inputFontSize)="inputFontSize($event)"
-     (inputColor)="inputColor($event)"
-     (inputFontWeight)="inputFontWeight($event)"
-     
-     
-     ></app-portalmenu>
+    <app-portalmenu></app-portalmenu>
+     <button (click)="changeStyle()">Change</button>
   </div>
 </div>
 
+
+
+
+<ng-template #buttonTemplate>
+    <app-button-template (click)="choiceElement($event)"></app-button-template>
+</ng-template>
+
+<ng-template #inputTemplate>
+  <app-input-template (click)="choiceElement($event)"></app-input-template>
+</ng-template>
+
+<ng-template #textareaTemplate>
+  <app-textarea-template (click)="choiceElement($event)"></app-textarea-template>  
+</ng-template>
+
+<ng-template #checkboxTemplate>
+  <app-checkbox-template (click)="choiceElement($event)"></app-checkbox-template>
+</ng-template>
+
+<ng-template #selectTemplate>
+  <app-select-template (click)="choiceElement($event)"></app-select-template>
+</ng-template> 
 
  
 
