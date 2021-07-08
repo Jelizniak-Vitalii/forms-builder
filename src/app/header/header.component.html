@@ -3,7 +3,7 @@
         <div class="header-content">
             <div class="header-title"><a [routerLink]="currentUser ? [] : ['/portal']">Form Builder</a></div>
             <div class="header-entry">
-                <button *ngIf='currentUser; else LogOut' class="header-logIn" ><a routerLink="/formLogIn">Log In</a></button>
+                <button *ngIf='!currentUser; else LogOut' class="header-logIn" ><a routerLink="/formLogIn">Log In</a></button>
                 <ng-template #LogOut>
                     <button (click)="logOut()" class="header-logOut"><a routerLink="/">Log Out</a></button>
                 </ng-template>

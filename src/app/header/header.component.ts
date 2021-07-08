@@ -10,7 +10,9 @@ import {  ServiceAuthentication } from '../shared/services/serviceAuthentication
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  currentUser: boolean;
+  
+  currentUser: boolean = false;
+  
 
   constructor(
     private router: Router,
@@ -21,12 +23,14 @@ export class HeaderComponent implements OnInit {
     this.serviceCurrentUser.data$.subscribe((x: any) =>{
       this.currentUser = x
     })
+    if(localStorage.getItem('currentUser') != null){
+      this.currentUser = true;
+    }
   }
   
   logOut(){
     localStorage.removeItem('currentUser');
     this.serviceCurrentUser.emitdata(!this.currentUser)
- 
     this.router.navigate(['/'])
   }
 }

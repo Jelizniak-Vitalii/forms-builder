@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: '', component: TitleComponent},
   { path: 'formLogIn', component: FormLogInComponent},
   { path: 'formRegistration', component: FormRegistrationComponent},
-  { path: 'portal', component: PortalComponent, canActivate: [GuardGuard]}
+  { path: 'portal', component: PortalComponent, canActivate: [GuardGuard]},
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

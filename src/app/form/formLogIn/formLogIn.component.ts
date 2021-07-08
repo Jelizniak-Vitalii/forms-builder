@@ -16,7 +16,8 @@ import {  ServiceAuthentication } from '../../shared/services/serviceAuthenticat
 export class FormLogInComponent implements OnInit {
 
   form: any = FormGroup;
-  currentUser: boolean = true;
+  currentUser: boolean = false;
+  
   
 
 
@@ -31,12 +32,14 @@ export class FormLogInComponent implements OnInit {
         this.form = this.formBuilder.group({
             name: '',
             password: ''
-        });    
+        });     
     }
 
     login(){
       this.serviceCurrentUser.emitdata(!this.currentUser)
+      
     }
+    
  
     
 

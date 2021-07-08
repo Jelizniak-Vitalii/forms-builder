@@ -107,11 +107,14 @@ export class PortalComponent implements OnInit {
 
 
   changeStyle(){
-    this.activeElement.style.fontSize = this.fontSize$;
-    this.activeElement.style.color = this.color$;
-    this.activeElement.style.width = this.width$;
-    this.activeElement.style.height = this.height$;
-    this.activeElement.style.borderStyle = this.borderStyle$;
+    if(this.activeElement != undefined){
+      this.activeElement.style.fontSize = this.fontSize$;
+      this.activeElement.style.color = this.color$;
+      this.activeElement.style.width = this.width$;
+      this.activeElement.style.height = this.height$;
+      this.activeElement.style.borderStyle = this.borderStyle$;
+    }
+    
   }
 
 }
