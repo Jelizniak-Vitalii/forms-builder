@@ -25,7 +25,6 @@ import { CheckboxTemplateComponent } from './portal/template/checkbox-template/c
 import { ButtonTemplateComponent } from './portal/template/button-template/button-template.component';
 import { InputTemplateComponent } from './portal/template/input-template/input-template.component';
 import * as fromReducer from './store/index'
-import { NoSanitizePipe } from './util/nosanitizepipe';
 import { environment } from '../environments/environment';
 
 
@@ -41,7 +40,6 @@ import { environment } from '../environments/environment';
     TitleComponent,
     PortalmenuComponent,
     PortalComponent,
-    NoSanitizePipe,
     SelectTemplateComponent,
     TextareaTemplateComponent,
     CheckboxTemplateComponent,
