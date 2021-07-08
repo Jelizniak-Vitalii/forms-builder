@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppRoutingModule } from './app-routing.module';
 
 
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FormRegistrationComponent } from './form/formRegistration/formRegistration.component';
@@ -45,7 +46,8 @@ import { environment } from '../environments/environment';
     CheckboxTemplateComponent,
     ButtonTemplateComponent,
     InputTemplateComponent,
-     
+
+
   ],
   imports: [
     BrowserModule,
@@ -61,11 +63,12 @@ import { environment } from '../environments/environment';
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot( { example: fromReducer.reducer } ),
+    ReactiveFormsModule
 
 
   ],
   providers: [],
   bootstrap: [AppComponent],
-  
+
 })
 export class AppModule { }

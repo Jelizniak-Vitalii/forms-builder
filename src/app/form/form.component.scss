@@ -4,7 +4,6 @@
 
 .autorization{
     width: 500px;
-    height: 500px;
     margin: 5% auto;
     background-color: #fff;
     border-radius: 20px;
@@ -29,8 +28,9 @@
             padding-bottom: 39px;
         }
         .form__input-group{
-            margin-top: 40%;
+            margin-top: 45%;
             width: 100%;
+            position: relative;
         }
         .form-input{
             @include fontFamily;
@@ -45,6 +45,7 @@
             border-radius: 27px;
             padding: 0 35px;
             margin-bottom: 16px;
+
         }
         .form-btn{
             padding: 0 20px;
@@ -58,17 +59,17 @@
             text-transform: uppercase;
             transition: all .4s;
             @include fontFamily;
-            margin-top: 32px;
+            margin-top: 20px;
         }
     }
-    
+
 }
 
 .registration,.logIn{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10%;
+    margin: 10% 0;
     .registration__title{
         font-size: 15px;
         color: #999;
@@ -84,9 +85,26 @@
             line-height: 1.4;
             text-transform: uppercase;
             font-weight: 500;
-            
+
             @include fontFamily;
         }
-        
     }
+}
+.form-validation{
+  text-align: center;
+  padding-bottom: 10px;
+  & small{
+    font-size: 16px;
+    color: red;
+
+  }
+}
+
+
+.correctDataSpan{
+  position: absolute;
+  top: -35px;
+  left: 22%;
+  font-size: 16px;
+  color: red;
 }

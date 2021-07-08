@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup } from '@angular/forms';
+import {Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,27 +9,35 @@ import { Router } from '@angular/router';
   styleUrls: ['../form.component.scss']
 })
 export class FormRegistrationComponent implements OnInit {
-    form: any = FormGroup;
 
+    form: FormGroup;
 
     constructor(
-        private formBuilder: FormBuilder,
         private http: HttpClient,
         private router: Router
         ){
-        
 
-        }
-
+    }
     ngOnInit(): void {
-        this.form = this.formBuilder.group({
-            name: '',
-            password: ''
-        });
+
+      this.form = new FormGroup({
+        email: new FormControl('',[
+          Validators.email,
+          Validators.required,
+        ]),
+        password: new FormControl('',[
+          Validators.required,
+          Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{5,15}$/)
+        ])
+      })
     }
+
     submit(): void {
-        this.http.post("http://localhost:3000/user/post", this.form.getRawValue())
-        .subscribe(()=> this.router.navigate(['./formLogIn']));
+      if(this.form.valid){
+        this.http.post("http://localhost:3000/user/post", this.form.value)
+          .subscribe(()=> this.router.navigate(['./formLogIn']));
+      }
     }
+
 
 }

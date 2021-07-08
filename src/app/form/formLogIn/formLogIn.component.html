@@ -1,11 +1,22 @@
 <div class="autorization">
-    <form class="form-logIn" [formGroup]="form">
+    <form class="form-logIn" [formGroup]="form" (ngSubmit)="submit()">
         <h3 class="form-title">Log In</h3>
         <div class="form__input-group">
-            <input formControlName="name" class="form-input" placeholder="Enter your Name" name="name" required>
-            <input formControlName="password" class="form-input" placeholder="Enter your Password" name="password" required>
+          <ng-template [ngIf]="correctData"><span class="correctDataSpan">Email or password is incorrect</span></ng-template>
+
+            <input formControlName="email" class="form-input" placeholder="Enter your email" name="email">
+          <div *ngIf="form.get('email')?.status == 'INVALID' && form.get('email')?.touched" class="form-validation">
+            <small *ngIf="form.get('email')?.errors?.required">Write something</small>
+            <small *ngIf="form.get('email')?.dirty && form.get('email')?.value.length > 0">Your email is incorrect</small>
+          </div>
+
+            <input formControlName="password" class="form-input" placeholder="Enter your Password" type="password">
+          <div *ngIf="form.get('password')?.status == 'INVALID' && form.get('password')?.touched" class="form-validation">
+            <small *ngIf="form.get('password')?.errors?.required">Write something</small>
+<!--            <small *ngIf="form.get('password')?.errors?.pattern && form.get('password')?.value.length > 0">Password is incorrect</small>-->
+          </div>
         </div>
-        <button (click)="submit()" class="form-btn" type="submit">Log in</button>
+        <button class="form-btn" type="submit">Log in</button>
 
         <div class="registration">
             <span class="registration__title">Don’t have an account?</span>
