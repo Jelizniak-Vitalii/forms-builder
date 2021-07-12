@@ -10,10 +10,10 @@ import { ExampleActions } from '../../store/actions';
 })
 export class PortalmenuComponent implements OnInit {
 
-  color: string;
-  width: string;
-  height: string;
-  fontSize: string;
+  // color: string;
+  // width: string;
+  // height: string;
+  // fontSize: string;
 
   constructor(private store$: Store) { }
 
@@ -33,9 +33,14 @@ export class PortalmenuComponent implements OnInit {
     this.store$.dispatch(ExampleActions.changeHeight({
       height: event.target.value }))
   }
-  changeBorderStyle(event: any): void{
-    this.store$.dispatch(ExampleActions.changeBorderStyle({
-      borderStyle: event.target.value }))
+  changeBorderColor(event: any): void{
+    this.store$.dispatch(ExampleActions.changeBorderColor({
+      borderColor: event.target.value }))
+  }
+  changeBorderRadius(event: any): void{
+    this.store$.dispatch(ExampleActions.changeBorderRadius({
+      borderRadius: event.target.value}))
+    // debugger
   }
 
   ngOnInit(): void {

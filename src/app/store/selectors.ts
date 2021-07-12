@@ -7,5 +7,6 @@ export namespace ExampleSelector {
     export const width = createSelector(state, (state) => state.width)
     export const height = createSelector(state, (state) => state.height)
     export const fontSize = createSelector(state, (state) => state.fontSize)
-    export const borderStyle = createSelector(state, (state) => state.borderStyle)
+    export const borderColor = createSelector(state, (state) => state.borderColor)
+    export const borderRadius = createSelector(state, (state) => state.borderRadius)
 }

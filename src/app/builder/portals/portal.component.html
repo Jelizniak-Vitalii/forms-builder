@@ -8,34 +8,42 @@
       [cdkDropListConnectedTo]="[doneList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let i of todo" cdkDrag [cdkPortalOutlet]="i">Pull me<ng-template>{{i}}</ng-template></div>
+      <div class="example-box" *ngFor="let i of todo" cdkDrag><ng-template [cdkPortalOutlet]="i">{{i}}</ng-template></div>
     </div>
 </div>
-  
+
   <div class="example-container">
-  
+
     <div
+      #newForm
       cdkDropList
       #doneList="cdkDropList"
       [cdkDropListData]="done"
       [cdkDropListConnectedTo]="[todoList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let i of done" cdkDrag [cdkPortalOutlet]="i">Pull me<ng-template >{{i}}</ng-template></div>
+      <div  class="example-box" *ngFor="let i of done" cdkDrag><ng-template [cdkPortalOutlet]="i">{{i}}</ng-template></div>
     </div>
+    <button (click)="createForm()" class="form-btn">Create Form</button>
   </div>
 
   <div class="example-container">
     <app-portalmenu></app-portalmenu>
-     <button (click)="changeStyle()">Change</button>
+     <button (click)="changeStyle()" class="form-btn">Change</button>
+  </div>
+</div>
+
+<div #newFormBlock class="newForm">
+  <div #newFormContainer class="newFormContainer">
+    <button (click)="closeForm()" class="closeForm">&#215;</button>
   </div>
 </div>
 
 
 
 
-<ng-template #buttonTemplate>
-    <app-button-template (click)="choiceElement($event)"></app-button-template>
+<ng-template #buttonTemplate >
+    <app-button-template   (click)="choiceElement($event)"></app-button-template>
 </ng-template>
 
 <ng-template #inputTemplate>
@@ -43,7 +51,7 @@
 </ng-template>
 
 <ng-template #textareaTemplate>
-  <app-textarea-template (click)="choiceElement($event)"></app-textarea-template>  
+  <app-textarea-template (click)="choiceElement($event)"></app-textarea-template>
 </ng-template>
 
 <ng-template #checkboxTemplate>
@@ -52,9 +60,13 @@
 
 <ng-template #selectTemplate>
   <app-select-template (click)="choiceElement($event)"></app-select-template>
-</ng-template> 
+</ng-template>
 
- 
+
+
+
+
+
 
 
 

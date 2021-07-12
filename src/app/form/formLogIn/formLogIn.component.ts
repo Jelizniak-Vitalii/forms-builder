@@ -19,8 +19,8 @@ export class FormLogInComponent implements OnInit {
 
     constructor(
         private http: HttpClient,
-        private router: Router,
-        private serviceCurrentUser: ServiceAuthentication
+        private serviceCurrentUser: ServiceAuthentication,
+        private router: Router
         ){}
 
     ngOnInit(): void {
@@ -49,6 +49,7 @@ export class FormLogInComponent implements OnInit {
           }
           else{
             this.correctData = true;
+            this.form.reset()
           }
         })
       }

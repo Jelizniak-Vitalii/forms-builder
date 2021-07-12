@@ -13,7 +13,6 @@
             <input formControlName="password" class="form-input" placeholder="Enter your Password" type="password">
           <div *ngIf="form.get('password')?.status == 'INVALID' && form.get('password')?.touched" class="form-validation">
             <small *ngIf="form.get('password')?.errors?.required">Write something</small>
-<!--            <small *ngIf="form.get('password')?.errors?.pattern && form.get('password')?.value.length > 0">Password is incorrect</small>-->
           </div>
         </div>
         <button class="form-btn" type="submit">Log in</button>

@@ -18,8 +18,12 @@ export namespace ExampleActions {
         "CHANGE_HEIGHT",
         props<{ height: string }>()
     );
-    export const changeBorderStyle = createAction(
-        "CHANGE_BORDER_STYLE",
-        props<{ borderStyle: string }>()
-    );    
+    export const changeBorderColor = createAction(
+        "CHANGE_BORDER_COLOR",
+        props<{ borderColor: string }>()
+    );
+    export const changeBorderRadius = createAction(
+      "CHANGE_BORDER_RADIUS",
+      props<{ borderRadius: string}>()
+    )
 }

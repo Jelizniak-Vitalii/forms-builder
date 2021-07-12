@@ -36,6 +36,7 @@ export class FormRegistrationComponent implements OnInit {
       if(this.form.valid){
         this.http.post("http://localhost:3000/user/post", this.form.value)
           .subscribe(()=> this.router.navigate(['./formLogIn']));
+        this.form.reset()
       }
     }
 

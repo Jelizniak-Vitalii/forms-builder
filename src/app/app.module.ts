@@ -18,13 +18,13 @@ import { HeaderComponent } from './header/header.component';
 import { FormRegistrationComponent } from './form/formRegistration/formRegistration.component';
 import { FormLogInComponent} from './form/formLogIn/formLogIn.component';
 import { TitleComponent } from './title/title.component';
-import { PortalmenuComponent } from './portal/portalmenu/portalmenu.component';
-import { PortalComponent } from './portal/portal/portal.component';
-import { SelectTemplateComponent } from './portal/template/select-template/select-template.component';
-import { TextareaTemplateComponent } from './portal/template/textarea-template/textarea-template.component';
-import { CheckboxTemplateComponent } from './portal/template/checkbox-template/checkbox-template.component';
-import { ButtonTemplateComponent } from './portal/template/button-template/button-template.component';
-import { InputTemplateComponent } from './portal/template/input-template/input-template.component';
+import { PortalmenuComponent } from './builder/portalmenu/portalmenu.component';
+import { PortalComponent } from './builder/portals/portal.component';
+import { SelectTemplateComponent } from './builder/template/select-template/select-template.component';
+import { TextareaTemplateComponent } from './builder/template/textarea-template/textarea-template.component';
+import { CheckboxTemplateComponent } from './builder/template/checkbox-template/checkbox-template.component';
+import { ButtonTemplateComponent } from './builder/template/button-template/button-template.component';
+import { InputTemplateComponent } from './builder/template/input-template/input-template.component';
 import * as fromReducer from './store/index'
 import { environment } from '../environments/environment';
 
