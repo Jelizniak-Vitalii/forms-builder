@@ -1,9 +1,20 @@
-import {Component, ViewContainerRef, OnInit, ViewChild, TemplateRef, ElementRef} from '@angular/core';
+import {
+  Component,
+  ViewContainerRef,
+  OnInit,
+  ViewChild,
+  TemplateRef,
+  ElementRef,
+  QueryList, ViewChildren
+} from '@angular/core';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { CdkDragDrop, moveItemInArray, copyArrayItem } from '@angular/cdk/drag-drop';
 
 import { select, Store } from '@ngrx/store';
 import { ExampleSelector} from '../../store/selectors'
+import { FormControl, FormGroup} from "@angular/forms";
+
+
 
 @Component({
   selector: 'app-portal',
@@ -16,9 +27,10 @@ export class PortalComponent implements OnInit {
   @ViewChild('textareaTemplate',{static: true}) textareaTemplate: TemplateRef<unknown>
   @ViewChild('checkboxTemplate',{static: true}) checkboxTemplate: TemplateRef<unknown>
   @ViewChild('selectTemplate',{static: true}) selectTemplate: TemplateRef<unknown>
-  @ViewChild('newForm') newForm: ElementRef;
   @ViewChild('newFormBlock') newFormBlock: ElementRef;
-  @ViewChild('newFormContainer') newFormContainer: ElementRef
+  @ViewChild('newFormContainer') newFormContainer: ElementRef;
+  @ViewChildren('newForm') newForm: QueryList<any>;
+
 
   buttonPortal: TemplatePortal<any>;
   checkboxPortal: TemplatePortal<any>;
@@ -35,8 +47,10 @@ export class PortalComponent implements OnInit {
   borderColor$: string
 
 
+  form: FormGroup;
+
+
   activeElement: any;
-  cloneForm: any;
 
   todo: any = [
 
@@ -49,7 +63,7 @@ export class PortalComponent implements OnInit {
 
   constructor(
     private _viewContainerRef: ViewContainerRef,
-    private store$: Store
+    private store$: Store,
     ) {
     this.store$.pipe(select(ExampleSelector.color))
     .subscribe(el =>
@@ -77,7 +91,16 @@ export class PortalComponent implements OnInit {
 
   }
 
+
+
   ngOnInit(): void {
+    this.form = new FormGroup({});
+    this.form.addControl('input', new FormControl())
+    this.form.addControl('textarea', new FormControl())
+    this.form.addControl('checkbox', new  FormControl())
+    this.form.addControl('select', new FormControl())
+
+
 
     const templateArr = [
       { portal: this.buttonPortal, portalElement: this.buttonTemplate  },
@@ -111,7 +134,6 @@ export class PortalComponent implements OnInit {
           event.currentIndex);
       }else{
         event.previousContainer.data.splice(event.previousIndex, 1)
-
       }
     }
   }
@@ -121,6 +143,7 @@ export class PortalComponent implements OnInit {
     if(this.done.length > 0) {
       this.activeElement =  event.target
     }
+
   }
 
 
@@ -133,22 +156,30 @@ export class PortalComponent implements OnInit {
       this.activeElement.style.borderRadius = this.borderRadius$;
       this.activeElement.style.borderColor = this.borderColor$
 
-
     }
   }
 
   createForm(){
     if(this.done.length > 0) {
-      this.cloneForm =  this.newForm.nativeElement.cloneNode(true);
-      this.newFormContainer.nativeElement.append(this.cloneForm)
+      this.newForm.toArray().map((el) =>{
+        this.newFormContainer.nativeElement.append(el.nativeElement)
+      })
       this.newFormBlock.nativeElement.style.display = "flex"
     }
-
   }
+  showFormValue(){
+      console.log(this.form.value)
+  }
+
 
   closeForm(){
     this.newFormBlock.nativeElement.style.display = "none"
-    this.cloneForm.remove()
+    while(this.newFormContainer.nativeElement.firstChild){
+      this.newFormContainer.nativeElement.firstChild.remove()
+    }
+    this.done = []
+
   }
+
 
 }

@@ -57,20 +57,28 @@
     bottom: 0;
     background-color: rgba(0,0,0,.3);
     padding: 10px;
+    .newFormBlock{
+      position: relative;
+      .newFormContainer{
+        padding: 30px;
+        border-radius: 20px;
+        border: solid 2px #ccc;
+        min-height: 60px;
+        background: white;
+        overflow: hidden;
+        width: 430px;
+
+      }
+      .closeForm{
+        position: absolute;
+        top: 0%;
+        right: 4%;
+        font-size: 40px;
+        background-color: transparent;
+      }
+    }
   }
-  .newFormContainer{
-    padding: 60px;
-    background: white;
-    border-radius: 20px;
-    position: absolute;
-  }
-  .closeForm{
-    position: absolute;
-    top: 0%;
-    right: 4%;
-    font-size: 40px;
-    background-color: transparent;
-  }
+
 
 
 

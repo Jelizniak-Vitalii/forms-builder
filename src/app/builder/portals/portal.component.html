@@ -1,5 +1,5 @@
 
-<div class="form-builder ">
+<div class="form-builder">
   <div class="example-container">
     <div
       cdkDropList
@@ -8,21 +8,24 @@
       [cdkDropListConnectedTo]="[doneList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let i of todo" cdkDrag><ng-template [cdkPortalOutlet]="i">{{i}}</ng-template></div>
+      <div class="example-box" *ngFor="let i of todo" cdkDrag [formGroup]="form">
+        <ng-template [cdkPortalOutlet]="i">{{i}}</ng-template>
+      </div>
     </div>
 </div>
 
   <div class="example-container">
-
     <div
-      #newForm
+
       cdkDropList
       #doneList="cdkDropList"
       [cdkDropListData]="done"
       [cdkDropListConnectedTo]="[todoList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div  class="example-box" *ngFor="let i of done" cdkDrag><ng-template [cdkPortalOutlet]="i">{{i}}</ng-template></div>
+      <div #newForm class="example-box" *ngFor="let i of done" cdkDrag [formGroup]="form">
+        <ng-template [cdkPortalOutlet]="i">{{i}}</ng-template>
+      </div>
     </div>
     <button (click)="createForm()" class="form-btn">Create Form</button>
   </div>
@@ -33,33 +36,36 @@
   </div>
 </div>
 
-<div #newFormBlock class="newForm">
-  <div #newFormContainer class="newFormContainer">
-    <button (click)="closeForm()" class="closeForm">&#215;</button>
+  <div #newFormBlock class="newForm">
+    <div class="newFormBlock">
+      <button (click)="closeForm()" class="closeForm">&#215;</button>
+      <div #newFormContainer class="newFormContainer">
+    </div>
   </div>
 </div>
 
 
 
 
-<ng-template #buttonTemplate >
-    <app-button-template   (click)="choiceElement($event)"></app-button-template>
+
+<ng-template #buttonTemplate>
+    <app-button-template (click)="choiceElement($event); showFormValue()"></app-button-template>
 </ng-template>
 
-<ng-template #inputTemplate>
-  <app-input-template (click)="choiceElement($event)"></app-input-template>
+<ng-template #inputTemplate [formGroup]="form">
+  <app-input-template formControlName="input" (click)="choiceElement($event)"></app-input-template>
 </ng-template>
 
-<ng-template #textareaTemplate>
-  <app-textarea-template (click)="choiceElement($event)"></app-textarea-template>
+<ng-template #textareaTemplate [formGroup]="form">
+  <app-textarea-template formControlName="textarea"  (click)="choiceElement($event)"></app-textarea-template>
 </ng-template>
 
-<ng-template #checkboxTemplate>
-  <app-checkbox-template (click)="choiceElement($event)"></app-checkbox-template>
+<ng-template #checkboxTemplate [formGroup]="form">
+  <app-checkbox-template formControlName="checkbox" (click)="choiceElement($event)"></app-checkbox-template>
 </ng-template>
 
-<ng-template #selectTemplate>
-  <app-select-template (click)="choiceElement($event)"></app-select-template>
+<ng-template #selectTemplate [formGroup]="form">
+  <app-select-template formControlName="select" (click)="choiceElement($event)"></app-select-template>
 </ng-template>
 
 

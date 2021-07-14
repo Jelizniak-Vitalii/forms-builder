@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ExampleActions } from '../../store/actions';
 
@@ -10,10 +10,6 @@ import { ExampleActions } from '../../store/actions';
 })
 export class PortalmenuComponent implements OnInit {
 
-  // color: string;
-  // width: string;
-  // height: string;
-  // fontSize: string;
 
   constructor(private store$: Store) { }
 
@@ -40,7 +36,6 @@ export class PortalmenuComponent implements OnInit {
   changeBorderRadius(event: any): void{
     this.store$.dispatch(ExampleActions.changeBorderRadius({
       borderRadius: event.target.value}))
-    // debugger
   }
 
   ngOnInit(): void {

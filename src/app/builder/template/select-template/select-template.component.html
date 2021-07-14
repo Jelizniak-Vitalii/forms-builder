@@ -1,4 +1,6 @@
-<select>
-    <option>First</option>
-    <option>Second
+<select
+  [(ngModel)]="value"
+  (ngModelChange)="onChange($event)">
+  <option>First</option>
+  <option>Second</option>
 </select>

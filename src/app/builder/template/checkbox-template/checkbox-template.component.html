@@ -1,4 +1,11 @@
+<!--<div>-->
+<!--    <input type="checkbox" class="checkbox" id="checkbox">-->
+<!--    <label for="checkbox">Checkbox</label>-->
+<!--</div>-->
 <div>
-    <input type="checkbox" class="checkbox" id="checkbox">
-    <label for="checkbox">Checkbox</label>
+  <input type="checkbox"
+         id="checkbox"
+         [ngModel]="value"
+         (ngModelChange)="onChange($event)">
+  <label for="checkbox">Checkbox</label>
 </div>
