@@ -1,12 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@import './app/reset';
+@import 'app/shared/reset';
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
 
 
 html, body { height: 100%; }
-body {  
+body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: rgb(233, 235, 234);
 }

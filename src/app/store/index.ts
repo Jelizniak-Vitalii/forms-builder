@@ -1,4 +1,3 @@
-
 export interface State {
   color: string;
   width: string;
@@ -6,7 +5,7 @@ export interface State {
   fontSize: string;
   borderColor: string;
   borderRadius: string;
-
+  event: string;
 }
 
 const initialState: State = {
@@ -15,38 +14,17 @@ const initialState: State = {
   height: '',
   fontSize: '',
   borderColor: '',
-  borderRadius: ''
-
+  borderRadius: '',
+  event: '',
 }
 
-
-
 export const reducer = (state = initialState, action: any): State => {
-
   switch (action.type) {
-    case "CHANGE_COLOR":
-      return {...state,
-        color: action.color,
-      }
-    case "CHANGE_FONT_SIZE":
-      return {...state,
-        fontSize: action.fontSize,
-      }
-    case "CHANGE_WIDTH":
-      return {...state,
-        width: action.width,
-      }
-    case "CHANGE_HEIGHT":
-      return {...state,
-        height: action.height,
-      }
-    case "CHANGE_BORDER_COLOR":
-      return {...state,
-        borderColor: action.borderColor,
-      }
-    case "CHANGE_BORDER_RADIUS":
-      return  { ...state,
-      borderRadius: action.borderRadius}
+    case "CHANGE_STYLE":
+      return {
+        ...state,
+        event: action.event,
+        [action.types]: action.event }
     default: return state;
   }
 }

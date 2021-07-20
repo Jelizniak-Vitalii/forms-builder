@@ -13,7 +13,6 @@
             <small *ngIf="form.get('password')?.errors?.required">Write something</small>
             <small *ngIf="form.get('password')?.errors?.pattern && form.get('password')?.value.length > 0">Password is incorrect</small>
           </div>
-
         </div>
         <button class="form-btn" type="submit" [disabled]="form.invalid">Registration</button>
 

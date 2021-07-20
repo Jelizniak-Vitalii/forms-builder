@@ -2,7 +2,7 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.autorization{
+.autorization {
     width: 500px;
     margin: 5% auto;
     background-color: #fff;
@@ -14,7 +14,7 @@
         align-items: center;
         padding: 0 55px;
         position: relative;
-        .form-title{
+        .form-title {
             @include fontFamily;
             font-size: 30px;
             color: #fff;
@@ -27,12 +27,12 @@
             padding-top: 50px;
             padding-bottom: 39px;
         }
-        .form__input-group{
+        .form__input-group {
             margin-top: 45%;
             width: 100%;
             position: relative;
         }
-        .form-input{
+        .form-input {
             @include fontFamily;
             font-size: 15px;
             color: #1b3815;
@@ -45,9 +45,8 @@
             border-radius: 27px;
             padding: 0 35px;
             margin-bottom: 16px;
-
         }
-        .form-btn{
+        .form-btn {
             padding: 0 20px;
             width: 100%;
             height: 50px;
@@ -62,22 +61,21 @@
             margin-top: 20px;
         }
     }
-
 }
 
-.registration,.logIn{
+.registration,.logIn {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 10% 0;
-    .registration__title{
+    .registration__title {
         font-size: 15px;
         color: #999;
         line-height: 1.4;
         margin-bottom: 10px;
         @include fontFamily;
     }
-    .registration__btn,.logIn__btn{
+    .registration__btn,.logIn__btn {
         background-color: transparent;
         a{
             font-size: 15px;
@@ -85,23 +83,21 @@
             line-height: 1.4;
             text-transform: uppercase;
             font-weight: 500;
-
             @include fontFamily;
         }
     }
 }
-.form-validation{
+
+.form-validation {
   text-align: center;
   padding-bottom: 10px;
-  & small{
+  & small {
     font-size: 16px;
     color: red;
-
   }
 }
 
-
-.correctDataSpan{
+.correctDataSpan {
   position: absolute;
   top: -35px;
   left: 22%;

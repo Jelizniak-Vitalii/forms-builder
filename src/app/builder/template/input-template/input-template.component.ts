@@ -1,5 +1,5 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
-import {ControlValueAccessor,   NG_VALUE_ACCESSOR} from "@angular/forms";
+import { Component, forwardRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
   selector: 'app-input-template',
@@ -11,13 +11,16 @@ import {ControlValueAccessor,   NG_VALUE_ACCESSOR} from "@angular/forms";
     multi: true
   }]
 })
+
 export class InputTemplateComponent implements OnInit, ControlValueAccessor  {
+  value: string
 
   constructor() { }
 
-  value: string
-  onChange = (value: any) => {};
+  ngOnInit() {
+  }
 
+  onChange = (value: any) => {};
 
   writeValue(obj: any) {
     this.value = obj;
@@ -26,11 +29,8 @@ export class InputTemplateComponent implements OnInit, ControlValueAccessor  {
   registerOnChange(fn: any) {
     this.onChange = fn;
   }
+
   registerOnTouched(fn: any) {
-  }
-
-  ngOnInit() {
-
   }
 
 }

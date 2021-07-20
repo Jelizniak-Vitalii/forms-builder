@@ -1,50 +1,46 @@
-
 <div class="form-builder">
-  <div class="example-container">
-    <div
-      cdkDropList
-      #todoList="cdkDropList"
-      [cdkDropListData]="todo"
-      [cdkDropListConnectedTo]="[doneList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let i of todo" cdkDrag [formGroup]="form">
-        <ng-template [cdkPortalOutlet]="i">{{i}}</ng-template>
+    <div class="example-container">
+      <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="todo"
+        [cdkDropListConnectedTo]="[doneList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let i of todo" cdkDrag [formGroup]="form">
+          <ng-template [cdkPortalOutlet]="i">{{i}}</ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="example-container">
+      <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="[todoList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div #newForm class="example-box" *ngFor="let i of done" cdkDrag [formGroup]="form">
+          <ng-template [cdkPortalOutlet]="i">{{i}}</ng-template>
+        </div>
+      </div>
+      <button (click)="createForm()" class="form-btn">Create Form</button>
+    </div>
+
+    <div class="example-container">
+      <app-portal-menu></app-portal-menu>
+       <button (click)="changeStyle()" class="form-btn">Change</button>
+    </div>
+
+
+    <div #newFormBlock class="newForm">
+      <div class="newFormBlock">
+        <button (click)="closeForm()" class="closeForm">&#215;</button>
+        <div #newFormContainer class="newFormContainer"></div>
       </div>
     </div>
 </div>
-
-  <div class="example-container">
-    <div
-
-      cdkDropList
-      #doneList="cdkDropList"
-      [cdkDropListData]="done"
-      [cdkDropListConnectedTo]="[todoList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div #newForm class="example-box" *ngFor="let i of done" cdkDrag [formGroup]="form">
-        <ng-template [cdkPortalOutlet]="i">{{i}}</ng-template>
-      </div>
-    </div>
-    <button (click)="createForm()" class="form-btn">Create Form</button>
-  </div>
-
-  <div class="example-container">
-    <app-portalmenu></app-portalmenu>
-     <button (click)="changeStyle()" class="form-btn">Change</button>
-  </div>
-</div>
-
-  <div #newFormBlock class="newForm">
-    <div class="newFormBlock">
-      <button (click)="closeForm()" class="closeForm">&#215;</button>
-      <div #newFormContainer class="newFormContainer">
-    </div>
-  </div>
-</div>
-
-
 
 
 

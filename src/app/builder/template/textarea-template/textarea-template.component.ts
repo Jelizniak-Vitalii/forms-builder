@@ -1,5 +1,5 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import { Component, forwardRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
   selector: 'app-textarea-template',
@@ -12,23 +12,24 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
   }]
 })
 export class TextareaTemplateComponent implements OnInit, ControlValueAccessor {
+  value: string
 
   constructor() { }
-  value: string
+
+  ngOnInit(): void {
+  }
+
   onChange = (value: any) => {};
 
   writeValue(obj: any) {
-
     this.value = obj;
   }
 
   registerOnChange(fn: any) {
     this.onChange = fn;
   }
-  registerOnTouched(fn: any) {
-  }
 
-  ngOnInit(): void {
+  registerOnTouched(fn: any) {
   }
 
 }

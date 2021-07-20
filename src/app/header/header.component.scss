@@ -1,32 +1,35 @@
+.container {
+  margin: 0 auto;
+  max-width: 1170px;
+}
+
 .header {
     background-color: #639083;
     padding: 30px;
-}
-.container {
-    margin: 0 auto;
-    max-width: 1170px;
-}
-.header-content {
+  .header-content {
     display: flex;
     justify-content: space-between;
     .header-title {
-        a{
-            font-size: 40px;
-            font-weight: 500;
-            color: #fff;
-        }
+      a{
+        font-size: 40px;
+        font-weight: 500;
+        color: #fff;
+      }
     }
     .header-logIn,.header-logOut {
-        a{
+      a{
         font-size: 20px;
         background-color: rgb(243, 174, 46);
         color: #fff;
         padding: 10px 15px;
         border-radius: 10px;
-        }
+      }
     }
     .header-logOut {
-        background-color: rgb(211, 60, 55);
+      background-color: rgb(211, 60, 55);
     }
+  }
 }
+
+
 

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -8,18 +8,16 @@ import { Router } from '@angular/router';
   templateUrl: './formRegistration.component.html',
   styleUrls: ['../form.component.scss']
 })
-export class FormRegistrationComponent implements OnInit {
-
+export class FormRegistrationComponent implements OnInit, OnDestroy {
     form: FormGroup;
+    authentication: any;
 
     constructor(
         private http: HttpClient,
         private router: Router
-        ){
+        ){ }
 
-    }
     ngOnInit(): void {
-
       this.form = new FormGroup({
         email: new FormControl('',[
           Validators.email,
@@ -34,11 +32,14 @@ export class FormRegistrationComponent implements OnInit {
 
     submit(): void {
       if(this.form.valid){
-        this.http.post("http://localhost:3000/user/post", this.form.value)
+        this.authentication = this.http.post("http://localhost:3000/user/post", this.form.value)
           .subscribe(()=> this.router.navigate(['./formLogIn']));
         this.form.reset()
       }
     }
 
+    ngOnDestroy() {
+      this.authentication.unsubscribe()
+    }
 
 }

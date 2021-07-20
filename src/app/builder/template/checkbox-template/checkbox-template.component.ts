@@ -1,5 +1,5 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import { Component, forwardRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
   selector: 'app-checkbox-template',
@@ -11,31 +11,26 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
     multi: true
   }]
 })
-export class CheckboxTemplateComponent implements OnInit, ControlValueAccessor {
 
+export class CheckboxTemplateComponent implements OnInit, ControlValueAccessor {
+  value: boolean
 
   constructor() { }
 
+  ngOnInit(): void {
+  }
 
-  value: boolean
   onChange = (value: any) => {};
 
   writeValue(obj: any) {
-
     this.value = obj;
   }
 
   registerOnChange(fn: any) {
     this.onChange = fn;
   }
+
   registerOnTouched(fn: any) {
   }
-
-
-
-  ngOnInit(): void {
-
-  }
-
 
 }

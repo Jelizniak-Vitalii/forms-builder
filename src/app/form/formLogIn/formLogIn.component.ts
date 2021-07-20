@@ -1,9 +1,8 @@
-import {Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import {  ServiceAuthentication } from '../../shared/services/serviceAuthentication'
-
+import {  ServiceAuthentication } from '../../shared/services/serviceAuthentication';
 
 @Component({
   selector: 'app-form',
@@ -11,11 +10,12 @@ import {  ServiceAuthentication } from '../../shared/services/serviceAuthenticat
   styleUrls: ['../form.component.scss']
 })
 
-export class FormLogInComponent implements OnInit {
+export class FormLogInComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   correctData: boolean = false;
   currentUser: boolean = false;
+  authentication: any;
 
     constructor(
         private http: HttpClient,
@@ -34,13 +34,11 @@ export class FormLogInComponent implements OnInit {
             Validators.minLength(5)
           ])
         })
-
     }
-
 
     submit(): void {
       if(this.form.valid){
-        this.http.post("http://localhost:3000/user/get", this.form.value,
+        this.authentication = this.http.post("http://localhost:3000/user/get", this.form.value,
         ).subscribe((el)=> {
           if (el){
             this.router.navigate(['./portal'])
@@ -54,5 +52,9 @@ export class FormLogInComponent implements OnInit {
         })
       }
     }
+
+  ngOnDestroy() {
+    this.authentication.unsubscribe()
+  }
 
 }
