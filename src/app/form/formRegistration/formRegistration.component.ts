@@ -38,8 +38,14 @@ export class FormRegistrationComponent implements OnInit, OnDestroy {
       }
     }
 
-    ngOnDestroy() {
+  redirectToLogIn(){
+    this.router.navigate(['./formLogIn'])
+  }
+
+  ngOnDestroy() {
+    if(this.authentication != undefined){
       this.authentication.unsubscribe()
     }
+  }
 
 }

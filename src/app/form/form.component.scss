@@ -77,14 +77,12 @@
     }
     .registration__btn,.logIn__btn {
         background-color: transparent;
-        a{
-            font-size: 15px;
-            color: #57b846;
-            line-height: 1.4;
-            text-transform: uppercase;
-            font-weight: 500;
-            @include fontFamily;
-        }
+        font-size: 15px;
+        color: #57b846;
+        line-height: 1.4;
+        text-transform: uppercase;
+        font-weight: 500;
+        @include fontFamily;
     }
 }
 

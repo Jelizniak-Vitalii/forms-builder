@@ -17,7 +17,7 @@
         <button class="form-btn" type="submit" [disabled]="form.invalid">Registration</button>
 
         <div class="logIn">
-            <button class="logIn__btn"><a routerLink="/formLogIn">Log in</a></button>
+            <button class="logIn__btn" type="button" (click)="redirectToLogIn()">Log in</button>
         </div>
     </form>
 </div>
