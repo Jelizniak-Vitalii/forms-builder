@@ -13,14 +13,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 })
 
 export class CheckboxTemplateComponent implements OnInit, ControlValueAccessor {
-  value: boolean
+  value: boolean;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onChange = (value: any) => {};
+  onChange = (value: any): void => {};
 
   writeValue(obj: any) {
     this.value = obj;

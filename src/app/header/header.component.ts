@@ -9,7 +9,7 @@ import {  ServiceAuthentication } from '../shared/services/serviceAuthentication
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  currentUser: boolean = false;
+  currentUser: boolean;
 
   constructor(
     private router: Router,
@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.serviceCurrentUser.data$.subscribe((x: any) =>{
       this.currentUser = x
+
     })
     if(localStorage.getItem('currentUser') != null){
       this.currentUser = true;

@@ -1,3 +1,7 @@
+$example-list-background: white;
+$example-list-border: #ccc;
+$newForm-background: rgba(0,0,0,.3);
+
 .form-builder {
   margin: 5% auto;
   display: flex;
@@ -9,16 +13,16 @@
     margin: 0 25px 25px 0;
     display: inline-block;
     vertical-align: top;
-    .form-btn{
+    .form-btn {
       width: 100%;
       padding: 20px;
       font-size: 20px;
       font-weight: 500;
     }
     .example-list {
-      border: solid 2px #ccc;
+      border: solid 2px $example-list-border;
       min-height: 60px;
-      background: white;
+      background-color: $example-list-background;
       border-radius: 4px;
       overflow: hidden;
       display: block;
@@ -31,10 +35,8 @@
 
 .example-box {
   padding: 10px 10px;
-  color: rgba(0, 0, 0, 0.87);
   box-sizing: border-box;
   cursor: move;
-  background: white;
   font-size: 18px;
   font-weight: normal;
 }
@@ -48,16 +50,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,.3);
+  background-color: $newForm-background;
   padding: 10px;
   .newFormBlock {
     position: relative;
     .newFormContainer {
       padding: 30px;
       border-radius: 20px;
-      border: solid 2px #ccc;
+      border: solid 2px $example-list-border;
       min-height: 60px;
-      background: white;
+      background-color: $example-list-background;
       overflow: hidden;
       width: 430px;
     }

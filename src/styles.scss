@@ -1,9 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
-@import 'app/shared/reset';
+@import 'app/shared/style/reset';
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-
-
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  src: url("app/shared/fonts/Roboto-Light.ttf");
+}
 
 html, body { height: 100%; }
 body {

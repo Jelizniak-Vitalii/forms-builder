@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class GuardGuard implements CanActivate {
   constructor(
     private router: Router,
-    ){}
+  ){}
 
   canActivate(
     route: ActivatedRouteSnapshot,

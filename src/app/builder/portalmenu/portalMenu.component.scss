@@ -1,0 +1,17 @@
+$color-menu: white;
+$color-menu-border: #ccc;
+
+.menu {
+  border: solid 1px $color-menu-border;
+  min-height: 60px;
+  background-color: $color-menu;
+  border-radius: 4px;
+  overflow: hidden;
+  .menu__items {
+    padding: 20px 10px;
+    box-sizing: border-box;
+    cursor: move;
+    font-size: 14px;
+  }
+}
+

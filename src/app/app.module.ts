@@ -19,12 +19,12 @@ import { environment } from '../environments/environment';
     AppComponent,
     HeaderComponent,
     TitleComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),

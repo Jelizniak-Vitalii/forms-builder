@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
   templateUrl: './formRegistration.component.html',
-  styleUrls: ['../form.component.scss']
+  styleUrls: ['./formRegistration.component.scss']
 })
 export class FormRegistrationComponent implements OnInit, OnDestroy {
     form: FormGroup;
@@ -32,7 +32,7 @@ export class FormRegistrationComponent implements OnInit, OnDestroy {
 
     submit(): void {
       if(this.form.valid){
-        this.authentication = this.http.post("http://localhost:3000/user/post", this.form.value)
+        this.authentication = this.http.post('http://localhost:3000/user/post', this.form.value)
           .subscribe(()=> this.router.navigate(['./formLogIn']));
         this.form.reset()
       }
@@ -47,5 +47,4 @@ export class FormRegistrationComponent implements OnInit, OnDestroy {
       this.authentication.unsubscribe()
     }
   }
-
 }

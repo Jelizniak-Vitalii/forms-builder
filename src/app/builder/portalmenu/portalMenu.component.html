@@ -1,0 +1,10 @@
+<div
+  class="menu"
+  *ngFor="let i of inputT">
+  <input
+    (input)="changeStyle($event, i.type)"
+    class="menu__items"
+    placeholder={{i.placeholder}}>
+</div>
+
+
