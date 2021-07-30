@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
-import {  ServiceAuthentication } from '../shared/services/serviceAuthentication'
+import {  ServiceAuthentication } from '../shared/services/serviceAuthentication';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   currentUser: boolean;
+  notifier = new Subject();
 
   constructor(
     private router: Router,
@@ -17,18 +20,24 @@ export class HeaderComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    this.serviceCurrentUser.data$.subscribe((x: any) =>{
-      this.currentUser = x
-
+    this.serviceCurrentUser.data$
+      .pipe(takeUntil(this.notifier))
+      .subscribe((x: any) => {
+      this.currentUser = x;
     })
-    if(localStorage.getItem('currentUser') != null){
+    if (localStorage.getItem('currentUser') != null) {
       this.currentUser = true;
     }
   }
 
-  logOut() {
+  logOut(): void {
     localStorage.removeItem('currentUser');
-    this.serviceCurrentUser.emitdata(!this.currentUser)
-    this.router.navigate(['/'])
+    this.serviceCurrentUser.emitData(!this.currentUser);
+    this.router.navigate(['/']);
+  }
+
+  ngOnDestroy(): void {
+    this.notifier.next();
+    this.notifier.complete();
   }
 }

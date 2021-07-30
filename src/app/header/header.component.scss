@@ -1,8 +1,5 @@
-$header-title: #fff;
-$header-background: #639083;
-$header-logOut: rgb(211, 60, 55);
-$header-logIn: rgb(243, 174, 46);
-$header-btn-text: #fff;
+@import "./src/app/shared/scssColor/headerColor";
+
 
 
 .container {

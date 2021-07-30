@@ -1,12 +1,7 @@
+@import "./src/app/shared/scssColor/formColor";
 @mixin  fontFamily {
   font-family: 'Roboto', sans-serif;
 }
-$registration-background: #fff;
-$form-title: #fff;
-$form-title-background: #57b846;
-$form-input: #ebebeb;
-$form-btn: #57b846;
-$form-wrong-data: red;
 
 .registration {
   width: 500px;
@@ -59,10 +54,10 @@ $form-wrong-data: red;
       padding: 0 20px;
       width: 100%;
       height: 50px;
-      background-color: $form-btn;
+      background-color: $form-btn-bckg;
       border-radius: 25px;
       font-size: 15px;
-      color: #fff;
+      color: $form-btn;
       line-height: 1.2;
       text-transform: uppercase;
       transition: all .4s;
@@ -84,11 +79,9 @@ $form-wrong-data: red;
     color: $form-btn;
     line-height: 1.4;
     text-transform: uppercase;
-    font-weight: 500;
   }
 
 }
-
 
 .form__validation {
   text-align: center;

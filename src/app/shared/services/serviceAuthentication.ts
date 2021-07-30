@@ -11,7 +11,7 @@ export class ServiceAuthentication {
 
   constructor() { }
 
-  emitdata(x: boolean): void {
+  emitData(x: boolean): void {
     this.data.next(x);
   }
 

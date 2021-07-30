@@ -1,6 +1,4 @@
-$example-list-background: white;
-$example-list-border: #ccc;
-$newForm-background: rgba(0,0,0,.3);
+@import "./src/app/shared/scssColor/portalColor";
 
 .form-builder {
   margin: 5% auto;
@@ -42,7 +40,7 @@ $newForm-background: rgba(0,0,0,.3);
 }
 
 .newForm {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;

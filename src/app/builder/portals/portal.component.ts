@@ -12,10 +12,11 @@ import {
 import { TemplatePortal } from '@angular/cdk/portal';
 import { CdkDragDrop, copyArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 import { select, Store } from '@ngrx/store';
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 import { ExampleSelector } from '../../store/selectors'
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: 'app-portal',
@@ -25,20 +26,20 @@ import { takeUntil } from "rxjs/operators";
 })
 
 export class PortalComponent implements OnInit, OnDestroy {
-  @ViewChild('buttonTemplate', {static: true}) buttonTemplate: TemplateRef<Object>;
-  @ViewChild('inputTemplate', {static: true}) inputTemplate: TemplateRef<Object>;
-  @ViewChild('textareaTemplate', {static: true}) textareaTemplate: TemplateRef<Object>;
-  @ViewChild('checkboxTemplate', {static: true}) checkboxTemplate: TemplateRef<Object>;
-  @ViewChild('selectTemplate', {static: true}) selectTemplate: TemplateRef<Object>;
-  @ViewChild('newFormBlock') newFormBlock: ElementRef;
+  @ViewChild('buttonTemplate', { static: true }) buttonTemplate: TemplateRef<Object>;
+  @ViewChild('inputTemplate', { static: true }) inputTemplate: TemplateRef<Object>;
+  @ViewChild('textareaTemplate', { static: true }) textareaTemplate: TemplateRef<Object>;
+  @ViewChild('checkboxTemplate', { static: true }) checkboxTemplate: TemplateRef<Object>;
+  @ViewChild('selectTemplate', { static: true }) selectTemplate: TemplateRef<Object>;
   @ViewChild('newFormContainer') newFormContainer: ElementRef;
   @ViewChildren('newForm') newForm: QueryList<any>;
+  @ViewChild('newFormBlock') newFormBlock: ElementRef;
 
-  buttonPortal: TemplatePortal<any>;
-  checkboxPortal: TemplatePortal<any>;
-  selectPortal: TemplatePortal<any>;
-  inputPortal: TemplatePortal<any>;
-  textareaPortal: TemplatePortal<any>;
+  buttonPortal: TemplatePortal;
+  checkboxPortal: TemplatePortal;
+  selectPortal: TemplatePortal;
+  inputPortal: TemplatePortal;
+  textareaPortal: TemplatePortal;
 
   color: string;
   width: string;
@@ -47,11 +48,13 @@ export class PortalComponent implements OnInit, OnDestroy {
   borderRadius: string;
   borderColor: string;
 
+  showNewForm: boolean = false;
+
   form: FormGroup;
 
   activeElement: HTMLElement;
 
-  todo: any[] = [];
+  todo: TemplatePortal<Object>[] = [];
   done = [];
 
   notifier = new Subject();
@@ -69,11 +72,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.form.addControl('select', new FormControl());
 
     const templateArr = [
-      {portal: this.buttonPortal, portalElement: this.buttonTemplate},
-      {portal: this.checkboxPortal, portalElement: this.checkboxTemplate},
-      {portal: this.selectPortal, portalElement: this.selectTemplate},
-      {portal: this.inputPortal, portalElement: this.inputTemplate},
-      {portal: this.textareaPortal, portalElement: this.textareaTemplate},
+      { portal: this.buttonPortal, portalElement: this.buttonTemplate },
+      { portal: this.checkboxPortal, portalElement: this.checkboxTemplate },
+      { portal: this.selectPortal, portalElement: this.selectTemplate },
+      { portal: this.inputPortal, portalElement: this.inputTemplate },
+      { portal: this.textareaPortal, portalElement: this.textareaTemplate },
     ];
 
     this.store.pipe(select(ExampleSelector.changeStyle('color')), (takeUntil(this.notifier)))
@@ -105,12 +108,12 @@ export class PortalComponent implements OnInit, OnDestroy {
         el.portalElement,
         this._viewContainerRef
       )
-      this.todo.push(newPortal)
+     this.todo.push(newPortal);
     })
   }
 
   drop(event: CdkDragDrop<any>): void {
-    if (event.previousContainer == event.container) {
+    if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       if (event.container.data.length < this.todo.length) {
@@ -121,54 +124,59 @@ export class PortalComponent implements OnInit, OnDestroy {
           event.currentIndex
         );
       } else {
-        event.previousContainer.data.splice(event.previousIndex, 1)
+        event.previousContainer.data.splice(event.previousIndex, 1);
       }
     }
   }
 
   choiceElement( event: any ): void {
     if (this.done.length > 0) {
-     return this.activeElement = event.target
+     this.activeElement = event.target;
     }
   }
 
   changeStyle(): void {
-    if (this.activeElement != undefined) {
-      this.activeElement.style.fontSize = this.fontSize;
+    if (this.activeElement !== undefined) {
+      if (Number(this.fontSize) < 41 && Number(this.fontSize) > 5) {
+        this.activeElement.style.fontSize = this.fontSize + 'px';
+      }
+      this.activeElement.style.width = this.width + 'px';
+      this.activeElement.style.height = this.height + 'px';
+      this.activeElement.style.borderRadius = this.borderRadius + 'px';
       this.activeElement.style.color = this.color;
-      this.activeElement.style.width = this.width;
-      this.activeElement.style.height = this.height;
-      this.activeElement.style.borderRadius = this.borderRadius;
-      this.activeElement.style.borderColor = this.borderColor
+      this.activeElement.style.borderColor = this.borderColor;
     }
   }
 
   createForm(): void {
     if (this.done.length > 0) {
-      this.newForm.toArray().map((el) => {
-        this.newFormContainer.nativeElement.append(el.nativeElement)
-      })
-      this.newFormBlock.nativeElement.style.display = "flex"
+      this.showNewForm = true;
+     setTimeout(() => {
+       this.newForm.toArray().map((el) => {
+         this.newFormContainer.nativeElement.append(el.nativeElement);
+       })
+     })
     }
   }
 
-  showFormValue() {
+  showFormValue(): void {
     for (let [key, value] of Object.entries(this.form.value)) {
-      if (value != null) {
-        return console.log(key, value)
+      if (value !== null) {
+        console.log(key, value);
       }
     }
   }
 
   closeForm(): void {
-    this.newFormBlock.nativeElement.style.display = "none"
     for (let i = 0; i < this.newFormContainer.nativeElement.childNodes.length; i++) {
-      this.newFormContainer.nativeElement.firstChild.remove()
+      this.newFormContainer.nativeElement.firstChild.remove();
     }
-    this.done = []
+    this.showNewForm = false;
+    this.done = [];
+    this.form.reset();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.notifier.next();
     this.notifier.complete();
   }

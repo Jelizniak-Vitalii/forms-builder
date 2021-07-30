@@ -1,7 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+
+import { environment } from '../../../environments/environment';
+import { AuthService } from '../../shared/services/authService';
 import {  ServiceAuthentication } from '../../shared/services/serviceAuthentication';
 
 @Component({
@@ -14,13 +18,13 @@ export class FormLogInComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   correctData: boolean;
-  currentUser: boolean;
-  authentication: any;
+  currentUser: boolean = false;
+  notifier = new Subject();
 
     constructor(
-        private http: HttpClient,
         private serviceCurrentUser: ServiceAuthentication,
-        private router: Router
+        private router: Router,
+        private authLogInService: AuthService
     ){}
 
     ngOnInit(): void {
@@ -38,27 +42,27 @@ export class FormLogInComponent implements OnInit, OnDestroy {
 
     submit(): void {
       if (this.form.valid) {
-        this.authentication = this.http.post('http://localhost:3000/user/get', this.form.value,
-        ).subscribe((el) => {
+        this.authLogInService.authorization( environment.API_LOGIN,this.form.value)
+          .pipe(takeUntil(this.notifier))
+          .subscribe((el) => {
           if (el) {
-            this.router.navigate(['./portal'])
+            this.router.navigate(['./portal']);
             localStorage.setItem('currentUser', JSON.stringify(el));
-            this.serviceCurrentUser.emitdata(!this.currentUser);
+            this.serviceCurrentUser.emitData(!this.currentUser);
           } else {
             this.correctData = true;
-            this.form.reset()
+            this.form.reset();
           }
         })
       }
     }
 
-  redirectToRegistration() {
-    return this.router.navigate(['./formRegistration'])
+  redirectToRegistration(): void {
+    this.router.navigate(['./formRegistration']);
   }
 
   ngOnDestroy(): void {
-      if (this.authentication != undefined) {
-        this.authentication.unsubscribe()
-      }
+    this.notifier.next();
+    this.notifier.complete();
   }
 }

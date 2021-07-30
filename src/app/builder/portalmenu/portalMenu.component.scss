@@ -1,5 +1,4 @@
-$color-menu: white;
-$color-menu-border: #ccc;
+@import "./src/app/shared/scssColor/portalMenuColor";
 
 .menu {
   border: solid 1px $color-menu-border;

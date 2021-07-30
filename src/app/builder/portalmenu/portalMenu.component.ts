@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { ExampleActions } from 'src/app/store/actions';
-import { INPUT_TYPES } from "../../shared/types/type";
 
 @Component({
   selector: 'app-portal-menu',
@@ -12,7 +11,7 @@ import { INPUT_TYPES } from "../../shared/types/type";
 
 export class PortalMenuComponent implements OnInit {
 
-  inputT: any = [
+  typeInput: { type: string, placeholder: string}[] = [
     { type: 'color', placeholder: 'Color' },
     { type: 'fontSize', placeholder: 'Font Size' },
     { type: 'width', placeholder: 'Width' },
@@ -26,7 +25,7 @@ export class PortalMenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  changeStyle(event: any, type: INPUT_TYPES): void {
+  changeStyle(event: any, type: string): void {
     this.store.dispatch(ExampleActions.changeStyle({
       event: event.target.value,
       types: type
