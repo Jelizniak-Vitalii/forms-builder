@@ -1,5 +1,5 @@
 import { FormLogInComponent } from './formLogIn.component';
-import { AuthService } from '../../shared/services/authService';
+import { AuthService } from 'src/app/shared/services/authService';
 import { EMPTY } from 'rxjs';
 
 describe('FormLogInComponent', () => {

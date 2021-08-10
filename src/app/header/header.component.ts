@@ -11,8 +11,8 @@ import {  ServiceAuthentication } from '../shared/services/serviceAuthentication
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  currentUser: boolean;
-  notifier = new Subject();
+  userIsLogged: boolean;
+  destroySubscribe = new Subject();
 
   constructor(
     private router: Router,
@@ -21,23 +21,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.serviceCurrentUser.data$
-      .pipe(takeUntil(this.notifier))
-      .subscribe((x: any) => {
-      this.currentUser = x;
+    .pipe(takeUntil(this.destroySubscribe))
+    .subscribe((userIsLogged: any) => {
+    this.userIsLogged = userIsLogged;
     })
-    if (localStorage.getItem('currentUser') != null) {
-      this.currentUser = true;
+    if (localStorage.getItem('userIsLogged') != null) {
+      this.userIsLogged = true;
     }
   }
 
   logOut(): void {
-    localStorage.removeItem('currentUser');
-    this.serviceCurrentUser.emitData(!this.currentUser);
+    localStorage.removeItem('userIsLogged');
+    this.serviceCurrentUser.emitData(!this.userIsLogged);
     this.router.navigate(['/']);
   }
 
   ngOnDestroy(): void {
-    this.notifier.next();
-    this.notifier.complete();
+    this.destroySubscribe.next();
+    this.destroySubscribe.complete();
   }
 }

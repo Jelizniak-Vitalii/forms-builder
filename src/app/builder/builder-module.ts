@@ -2,11 +2,11 @@ import { NgModule } from "@angular/core";
 import { PortalModule } from "@angular/cdk/portal";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { RouterModule, Routes } from "@angular/router";
-import { GuardGuard } from "../shared/guard/guard.guard";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { PortalMenuComponent } from './portalmenu/portalMenu.component';
+import { GuardGuard } from "../shared/guard/guard.guard";
+import { PortalMenuComponent } from "./portalmenu/portalMenu.component";
 import { PortalComponent } from "./portals/portal.component";
 import { SelectTemplateComponent} from "./template/select-template/select-template.component";
 import { TextareaTemplateComponent } from "./template/textarea-template/textarea-template.component";
@@ -26,7 +26,7 @@ const routes: Routes = [
     TextareaTemplateComponent,
     CheckboxTemplateComponent,
     ButtonTemplateComponent,
-    InputTemplateComponent
+    InputTemplateComponent,
   ],
   imports: [
     PortalModule,
@@ -43,6 +43,4 @@ const routes: Routes = [
   ],
 })
 
-export class BuilderModule {
-
-}
+export class BuilderModule { }

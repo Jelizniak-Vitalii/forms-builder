@@ -11,11 +11,16 @@
     margin: 0 25px 25px 0;
     display: inline-block;
     vertical-align: top;
+    .button__group {
+      display: flex;
+      justify-content: space-between;
+    }
     .form-btn {
       width: 100%;
       padding: 20px;
       font-size: 20px;
       font-weight: 500;
+      border: solid 2px #ccc;
     }
     .example-list {
       border: solid 2px $example-list-border;

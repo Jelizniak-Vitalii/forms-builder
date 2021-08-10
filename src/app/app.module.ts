@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { TitleComponent } from './title/title.component';
-import * as fromReducer from './store/index'
+import * as fromReducer from './store/reducer'
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -19,7 +19,6 @@ import { environment } from '../environments/environment';
     AppComponent,
     HeaderComponent,
     TitleComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -27,10 +26,10 @@ import { environment } from '../environments/environment';
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot( { example: fromReducer.reducer } ),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     ReactiveFormsModule,
   ],
   bootstrap: [AppComponent],

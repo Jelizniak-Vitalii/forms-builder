@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'formLogIn', loadChildren: () => import('./form/formLogIn/formLoginModule').then(m => m.FormLoginModule) },
   { path: 'formRegistration', loadChildren: () => import('./form/formRegistration/formRegistrationModule').then(m => m.FormRegistrationModule) },
   { path: 'portal', loadChildren: () => import('./builder/builder-module').then(m => m.BuilderModule), canActivate: [GuardGuard] },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'portal' },
 ];
 
 @NgModule({

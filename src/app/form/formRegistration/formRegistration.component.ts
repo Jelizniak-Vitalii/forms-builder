@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from "rxjs/operators";
 
-import { environment } from '../../../environments/environment';
-import { AuthService } from '../../shared/services/authService';
+import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/shared/services/authService';
 
 @Component({
   selector: 'app-form',
@@ -15,7 +15,7 @@ import { AuthService } from '../../shared/services/authService';
 export class FormRegistrationComponent implements OnInit, OnDestroy {
 
     form: FormGroup;
-    notifier = new Subject();
+    destroySubscribe = new Subject();
 
     constructor(
         private router: Router,
@@ -38,8 +38,8 @@ export class FormRegistrationComponent implements OnInit, OnDestroy {
     submit(): void {
       if (this.form.valid) {
         this.authRegistrationService.authorization( environment.API_REGISTRATION,this.form.value)
-          .pipe(takeUntil(this.notifier))
-          .subscribe(()=> this.router.navigate(['./formLogIn']));
+        .pipe(takeUntil(this.destroySubscribe))
+        .subscribe(()=> this.router.navigate(['./formLogIn']));
         this.form.reset();
       }
     }
@@ -49,7 +49,7 @@ export class FormRegistrationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.notifier.next();
-    this.notifier.complete();
+    this.destroySubscribe.next();
+    this.destroySubscribe.complete();
   }
 }

@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subject } from "rxjs";
+import { Subject } from 'rxjs';
 import { takeUntil } from "rxjs/operators";
 
-import { environment } from '../../../environments/environment';
-import { AuthService } from '../../shared/services/authService';
-import {  ServiceAuthentication } from '../../shared/services/serviceAuthentication';
+import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/shared/services/authService';
+import {  ServiceAuthentication } from 'src/app/shared/services/serviceAuthentication';
 
 @Component({
   selector: 'app-form',
@@ -18,8 +18,8 @@ export class FormLogInComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   correctData: boolean;
-  currentUser: boolean = false;
-  notifier = new Subject();
+  userIsLogged: boolean = false;
+  destroySubscribe = new Subject();
 
     constructor(
         private serviceCurrentUser: ServiceAuthentication,
@@ -43,17 +43,17 @@ export class FormLogInComponent implements OnInit, OnDestroy {
     submit(): void {
       if (this.form.valid) {
         this.authLogInService.authorization( environment.API_LOGIN,this.form.value)
-          .pipe(takeUntil(this.notifier))
-          .subscribe((el) => {
-          if (el) {
-            this.router.navigate(['./portal']);
-            localStorage.setItem('currentUser', JSON.stringify(el));
-            this.serviceCurrentUser.emitData(!this.currentUser);
-          } else {
-            this.correctData = true;
-            this.form.reset();
-          }
-        })
+        .pipe(takeUntil(this.destroySubscribe))
+        .subscribe((el) => {
+        if (el) {
+          this.router.navigate(['./portal']);
+          localStorage.setItem('userIsLogged', JSON.stringify(el));
+          this.serviceCurrentUser.emitData(!this.userIsLogged);
+        } else {
+          this.correctData = true;
+          this.form.reset();
+        }
+      })
       }
     }
 
@@ -62,7 +62,7 @@ export class FormLogInComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.notifier.next();
-    this.notifier.complete();
+    this.destroySubscribe.next();
+    this.destroySubscribe.complete();
   }
 }

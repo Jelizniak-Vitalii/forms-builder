@@ -6,6 +6,14 @@ export interface State {
   borderColor: string;
   borderRadius: string;
   event: string;
+  initialForm: [
+    { type: string },
+    { type: string },
+    { type: string },
+    { type: string },
+    { type: string },
+  ];
+  newForm: [];
 }
 
 const initialState: State = {
@@ -16,6 +24,15 @@ const initialState: State = {
   borderColor: '',
   borderRadius: '',
   event: '',
+  initialForm: [
+    { type: 'button' },
+    { type: 'checkbox' },
+    { type: 'textarea' },
+    { type: 'select' },
+    { type: 'input' },
+  ],
+  newForm: [],
+
 }
 
 export const reducer = (state = initialState, action: any): State => {
@@ -25,6 +42,16 @@ export const reducer = (state = initialState, action: any): State => {
         ...state,
         event: action.event,
         [action.types]: action.event }
+    case "INITIAL_FORM_ELEMENT":
+     return  {
+       ...state,
+       initialForm: action.initialForm,
+     }
+    case "SAVE_NEW_FORM":
+      return {
+        ...state,
+        newForm: action.newForm,
+      }
     default: return state;
   }
 }

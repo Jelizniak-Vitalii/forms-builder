@@ -24,6 +24,4 @@ const routes: Routes = [
   ]
 })
 
-export class FormRegistrationModule {
-
-}
+export class FormRegistrationModule { }

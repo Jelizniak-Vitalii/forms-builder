@@ -1,9 +1,9 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {RouterModule, Routes} from "@angular/router";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterModule, Routes } from "@angular/router";
 
-import {FormLogInComponent} from "./formLogIn.component";
+import { FormLogInComponent } from "./formLogIn.component";
 
 const routes: Routes = [
   { path: '', component: FormLogInComponent },
@@ -24,6 +24,4 @@ const routes: Routes = [
   ]
 })
 
-export class FormLoginModule {
-
-}
+export class FormLoginModule { }

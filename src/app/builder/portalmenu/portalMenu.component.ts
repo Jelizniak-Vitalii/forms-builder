@@ -30,5 +30,6 @@ export class PortalMenuComponent implements OnInit {
       event: event.target.value,
       types: type
     }))
+
   }
 }

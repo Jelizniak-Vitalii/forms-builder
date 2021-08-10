@@ -1,7 +1,6 @@
 @import "./src/app/shared/scssColor/formColor";
 @mixin  fontFamily {
   font-family: 'Roboto', sans-serif;
-
 }
 
 .authorization {
@@ -52,6 +51,7 @@
     }
     .form__btn {
       padding: 0 20px;
+      font-weight: bold;
       width: 100%;
       height: 50px;
       background-color: $form-btn-bckg;
@@ -84,7 +84,7 @@
     font-weight: bold;
     background-color: transparent;
     font-size: 15px;
-    color: $form-btn;
+    color: $form-logIn-btn-registration;
     line-height: 1.4;
     text-transform: uppercase;
     @include fontFamily;
